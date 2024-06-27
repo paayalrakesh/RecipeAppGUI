@@ -125,7 +125,6 @@ namespace RecipeAppGUI
             List<Recipe> filteredRecipes = FilterRecipes();
             if (!filteredRecipes.Any())
             {
-                MessageBox.Show("No recipes match the filter criteria.");
                 return;
             }
 
