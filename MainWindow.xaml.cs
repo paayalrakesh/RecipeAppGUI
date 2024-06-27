@@ -81,10 +81,10 @@ namespace RecipeAppGUI
                 recipes.Add(recipe);
 
                 MessageBox.Show("Recipe added successfully!");
-                break; // Break the loop after successfully adding the recipe
+             break; // Break the loop after successfully adding the recipe
 
-            Restart:
-                continue; // Restart the loop if fields are cleared
+    Restart:
+        continue; // Restart the loop if fields are cleared
             }
         }
 

@@ -5,15 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecipeAppGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Add Recipe" HorizontalAlignment="Left" Margin="120,80,0,0" VerticalAlignment="Top" Click="AddRecipeButton_Click"/>
-        <Button Content="View Recipe" HorizontalAlignment="Left" Margin="120,123,0,0" VerticalAlignment="Top" Click="ViewRecipesButton_Click"/>
-        <Button Content="Scale Recipe" HorizontalAlignment="Left" Margin="120,171,0,0" VerticalAlignment="Top" Click="ScaleRecipeButton_Click"/>
-        <Button Content="Reset Quantities" HorizontalAlignment="Left" Margin="120,291,0,0" VerticalAlignment="Top" Click="ResetQuantitiesButton_Click"/>
-        <Button Content="Delete Recipe" HorizontalAlignment="Left" Margin="120,217,0,0" VerticalAlignment="Top" Click="DeleteRecipeButton_Click"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="120,338,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.064,5.73" Click="ExitButton_Click"/>
-        <Button Content="Filter Recipes" HorizontalAlignment="Left" Margin="120,257,0,0" VerticalAlignment="Top" Click="FilterRecipesButton_Click"/>
-        <StackPanel x:Name="StepsPanel" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
+       Title="Recipe App" Height="450" Width="800"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#FFF1F3">
+
+    <Window.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FFC1CC" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Beige"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#FFFFF1F3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Recip-Ebook App" 
+                   FontSize="28" 
+                   FontWeight="Bold" 
+                   Foreground="#FFA94264" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,20,0,20" FontFamily="Snap ITC"/>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <Button Style="{StaticResource CustomButtonStyle}" 
+                    Content="Add Recipe" 
+                    Click="AddRecipeButton_Click" 
+                    Width="200" Foreground="#FFC16A6A"/>
+
+            <Button Style="{StaticResource CustomButtonStyle}" 
+                    Content="View Recipe" 
+                    Click="ViewRecipesButton_Click" 
+                    Width="200" Foreground="#FFC16A6A"/>
+
+            <Button Style="{StaticResource CustomButtonStyle}" 
+                    Content="Filter Recipes" 
+                    Click="FilterRecipesButton_Click" 
+                    Width="200" Foreground="#FFC16A6A"/>
+
+            <Button Style="{StaticResource CustomButtonStyle}" 
+                    Content="Scale Recipe" 
+                    Click="ScaleRecipeButton_Click" 
+                    Width="200" Foreground="#FFC16A6A"/>
+
+            <Button Style="{StaticResource CustomButtonStyle}" 
+                    Content="Reset Quantities" 
+                    Click="ResetQuantitiesButton_Click" 
+                    Width="200" Foreground="#FFC16A6A"/>
+
+            <Button Style="{StaticResource CustomButtonStyle}" 
+                    Content="Delete Recipe" 
+                    Click="DeleteRecipeButton_Click" 
+                    Width="200" Foreground="#FFC16A6A"/>
+
+            <Button Style="{StaticResource CustomButtonStyle}" 
+                    Content="Exit" 
+                    Click="ExitButton_Click" 
+                    Width="200" Foreground="#FFC16A6A"/>
+        </StackPanel>
+
+        <StackPanel x:Name="StepsPanel" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Visibility="Collapsed"/>
     </Grid>
+
 </Window>
