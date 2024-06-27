@@ -55,13 +55,21 @@ namespace RecipeAppGUI
 
         public void DisplayRecipe() // Method to display the recipe details
         {
-            var recipeDetails = new StringBuilder();
+            var recipeDetails = new StringBuilder(); // Creates a StringBuilder to accumulate the recipe details
 
             recipeDetails.AppendLine("-----------------------------------------------------------------");
             recipeDetails.AppendLine($"{Name} Recipe:");
             recipeDetails.AppendLine("-----------------------------------------------------------------");
             recipeDetails.AppendLine("This recipe contains the following ingredients:");
 
+
+            /*Title:The foreach Loop
+            Author: w3schools
+            Date: 2024
+            Code Version: 1
+            Availability: https://www.w3schools.com/cs/cs_foreach_loop.php */
+
+            // Loops through each ingredient and appends its details
             foreach (var ingredient in Ingredients)
             {
                 recipeDetails.AppendLine($"Ingredient: {ingredient.Name}");
@@ -74,6 +82,7 @@ namespace RecipeAppGUI
             recipeDetails.AppendLine("-----------------------------------------------------------------");
             recipeDetails.AppendLine("Steps to follow:");
 
+            // Loops through steps and appends its details
             for (int i = 0; i < Steps.Count; i++)
             {
                 recipeDetails.AppendLine($"Step: {i + 1}");
@@ -83,15 +92,18 @@ namespace RecipeAppGUI
 
             recipeDetails.AppendLine("-----------------------------------------------------------------");
 
-            int totalCalories = CalculateTotalCalories();
-            recipeDetails.AppendLine("Total Calories: " + totalCalories);
+            int totalCalories = CalculateTotalCalories(); // Calculates the total calories
+            recipeDetails.AppendLine("Total Calories: " + totalCalories); // Appends the total calories
 
+            // Checks if total calories exceed 300 and appends a warning if true
             if (totalCalories > 300)
             {
                 recipeDetails.AppendLine("Warning: Total calories exceed 300!");
             }
 
-            string calorieMessage;
+            string calorieMessage; // Variable to hold the calorie message
+
+            // Sets the calorie message based on total calories
             if (totalCalories < 300)
             {
                 calorieMessage = "This is a low-calorie meal.";
@@ -100,7 +112,7 @@ namespace RecipeAppGUI
             {
                 calorieMessage = $"This is a high-calorie meal. It exceeds the limit by {totalCalories - 300} calories.";
 
-                var highCalorieIngredients = Ingredients.Where(i => i.Calories > 100).ToList();
+                var highCalorieIngredients = Ingredients.Where(i => i.Calories > 100).ToList(); // Filters high-calorie ingredients
                 if (highCalorieIngredients.Any())
                 {
                     calorieMessage += "\nHigh-calorie ingredients:";
@@ -111,25 +123,29 @@ namespace RecipeAppGUI
                 }
             }
 
-            recipeDetails.AppendLine($"\n\nCalorie Information:\n{calorieMessage}");
+            recipeDetails.AppendLine($"\n\nCalorie Information:\n{calorieMessage}"); // Appends the calorie information
 
-            // Append food group explanations
+            // Appends food group explanations
             recipeDetails.AppendLine("\nFood Group Explanations:");
             foreach (var foodGroup in FoodGroupExplanations)
             {
                 recipeDetails.AppendLine($"- {foodGroup.Key}: {foodGroup.Value}");
             }
 
+            // Displays the recipe details in a message box
             MessageBox.Show(recipeDetails.ToString(), "Recipe Details", MessageBoxButton.OK);
         }
 
-        public int CalculateTotalCalories() // Method to calculate the total calories of the recipe
+        // Method to calculate the total calories of the recipe
+        public int CalculateTotalCalories()
         {
-            return Ingredients.Sum(ingredient => ingredient.Calories); // Summing up the calories of all ingredients
+            return Ingredients.Sum(ingredient => ingredient.Calories); // Returns the sum of the calories of all ingredients
         }
 
-        // Event for calories exceeded
-        public delegate void CaloriesExceededHandler(string message); // Declaring a delegate for calories exceeded event
-        public event CaloriesExceededHandler OnCaloriesExceeded; // Declaring the calories exceeded event
+        // Delegate for the calories exceeded event
+        public delegate void CaloriesExceededHandler(string message);
+
+        // Event to handle calories exceeded
+        public event CaloriesExceededHandler OnCaloriesExceeded;
     }
 }
